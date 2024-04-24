@@ -29,7 +29,7 @@ def main():
     print(f"\n[i] cuda is available: {torch.cuda.is_available()}\n")
     if torch.cuda.is_available():
         print(f"[i] cuda version: {torch.version.cuda}\n")
-    uvicorn.run(app, host="0.0.0.0", port=8090)
+    uvicorn.run(app, host="0.0.0.0", port=8080)
 
 
 if __name__ == "__main__":
