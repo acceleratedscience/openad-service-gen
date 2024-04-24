@@ -1,0 +1,40 @@
+{
+  "service_type": "generate_data",
+  "description": "\n    Interface for TorchDrug flow-based autoregressive graph algorithm (GraphAF).\n    Currently supported algorithm versions are \"zinc250k_v0\", \"qed_v0\" and \"plogp_v0\".\n    ",
+  "target": {
+    "title": "Target for generation",
+    "type": "object",
+    "description": "Optional target for generation."
+  },
+  "generator_type": {
+    "algorithm_application": "TorchDrugGraphAF",
+    "domain": "materials",
+    "algorithm_name": "TorchDrugGenerator",
+    "algorithm_type": "generation"
+  },
+  "algorithm_versions": [
+    "plogp_v0",
+    "qed_v0",
+    "zinc250k_v0"
+  ],
+  "service_name": "generate with TorchDrugGraphAF",
+  "service_description": "",
+  "valid_types": [
+    "TorchDrugGraphAF"
+  ],
+  "type_description": {},
+  "parameters": {
+    "algorithm_version": {
+      "title": "Algorithm Version",
+      "default": "zinc250k_v0",
+      "type": "string"
+    }
+  },
+  "required_parameters": [],
+  "category": "generation",
+  "sub_category": "generates",
+  "wheel_package": "",
+  "GPU": true,
+  "persistent": true,
+  "help": ""
+}

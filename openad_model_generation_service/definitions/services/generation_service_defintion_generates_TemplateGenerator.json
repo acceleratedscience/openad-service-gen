@@ -1,0 +1,44 @@
+{
+  "service_type": "generate_data",
+  "description": "Configuration for specific generator.",
+  "target": {
+    "title": "Target name",
+    "description": "A simple string to define the name in the output [Hello name].",
+    "type": "string"
+  },
+  "generator_type": {
+    "algorithm_application": "TemplateGenerator",
+    "domain": "materials",
+    "algorithm_name": "Template",
+    "algorithm_type": "conditional_generation"
+  },
+  "algorithm_versions": [
+    "v0"
+  ],
+  "service_name": "generate with TemplateGenerator",
+  "service_description": "",
+  "valid_types": [
+    "TemplateGenerator"
+  ],
+  "type_description": {},
+  "parameters": {
+    "algorithm_version": {
+      "title": "Algorithm Version",
+      "default": "v0",
+      "type": "string"
+    },
+    "temperature": {
+      "title": "Temperature",
+      "description": "Temperature parameter ( in celsius )",
+      "default": 36,
+      "type": "integer"
+    }
+  },
+  "required_parameters": [],
+  "category": "generation",
+  "sub_category": "generates",
+  "wheel_package": "",
+  "GPU": true,
+  "persistent": true,
+  "help": ""
+}

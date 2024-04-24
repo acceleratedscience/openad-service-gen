@@ -1,0 +1,60 @@
+{
+  "service_type": "generate_data",
+  "description": "Configuration to predict affinity for a given ligand/protrin target pair.",
+  "target": {
+    "title": "List of Proteins",
+    "description": "List of Proteins as Targets",
+    "type": "array"
+  },
+  "generator_type": {
+    "algorithm_application": "AffinityPredictor",
+    "domain": "materials",
+    "algorithm_name": "PaccMann",
+    "algorithm_type": "prediction"
+  },
+  "algorithm_versions": [
+    "v0"
+  ],
+  "service_name": "generate with AffinityPredictor",
+  "service_description": "",
+  "valid_types": [
+    "AffinityPredictor"
+  ],
+  "type_description": {},
+  "parameters": {
+    "algorithm_version": {
+      "title": "Algorithm Version",
+      "default": "v0",
+      "type": "string"
+    },
+    "target": {
+      "title": "Target",
+      "description": "List of protein targets as AA sequences.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "ligands": {
+      "title": "Ligands",
+      "description": "List of ligands in SMILES format.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "confidence": {
+      "title": "Confidence",
+      "description": "Whether the confidence for the prediction should be returned.",
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "required_parameters": [],
+  "category": "generation",
+  "sub_category": "generates",
+  "wheel_package": "",
+  "GPU": true,
+  "persistent": true,
+  "help": ""
+}

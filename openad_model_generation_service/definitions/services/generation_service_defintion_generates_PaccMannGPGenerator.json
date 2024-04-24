@@ -1,0 +1,121 @@
+{
+  "service_type": "generate_data",
+  "description": "\n    Configuration to generate compounds controlling molecules properties.\n\n    Implementation from the paper: https://doi.org/10.1021/acs.jcim.1c00889.\n    ",
+  "target": {
+    "title": "Scoring functions with parameters",
+    "description": "Scoring functions will be used to generate a score for the generated molecules.",
+    "type": "object"
+  },
+  "generator_type": {
+    "algorithm_application": "PaccMannGPGenerator",
+    "domain": "materials",
+    "algorithm_name": "PaccMannGP",
+    "algorithm_type": "controlled_sampling"
+  },
+  "algorithm_versions": [
+    "fast-example-v0",
+    "fast-example-v1",
+    "v0",
+    "v10",
+    "v11",
+    "v12"
+  ],
+  "service_name": "generate with PaccMannGPGenerator",
+  "service_description": "",
+  "valid_types": [
+    "PaccMannGPGenerator"
+  ],
+  "type_description": {},
+  "parameters": {
+    "algorithm_version": {
+      "title": "Algorithm Version",
+      "default": "v0",
+      "type": "string"
+    },
+    "batch_size": {
+      "title": "Batch Size",
+      "description": "Batch size used for the generative model sampling.",
+      "default": 32,
+      "type": "integer"
+    },
+    "temperature": {
+      "title": "Temperature",
+      "description": "Temperature parameter for the softmax sampling in decoding.",
+      "default": 1.4,
+      "type": "number"
+    },
+    "generated_length": {
+      "title": "Generated Length",
+      "description": "Maximum length in tokens of the generated molcules (relates to the SMILES length).",
+      "default": 100,
+      "type": "integer"
+    },
+    "limit": {
+      "title": "Limit",
+      "description": "Hypercube limits in the latent space.",
+      "default": 5.0,
+      "type": "number"
+    },
+    "acquisition_function": {
+      "title": "Acquisition Function",
+      "description": "Acquisition function used in the Gaussian process. More details in https://scikit-optimize.github.io/stable/modules/generated/skopt.gp_minimize.html.",
+      "default": "EI",
+      "type": "string"
+    },
+    "number_of_steps": {
+      "title": "Number Of Steps",
+      "description": "Number of steps for an optmization round.",
+      "default": 32,
+      "type": "integer"
+    },
+    "number_of_initial_points": {
+      "title": "Number Of Initial Points",
+      "description": "Number of initial points evaluated.",
+      "default": 16,
+      "type": "integer"
+    },
+    "initial_point_generator": {
+      "title": "Initial Point Generator",
+      "description": "Scheme to generate initial points. More details in https://scikit-optimize.github.io/stable/modules/generated/skopt.gp_minimize.html.",
+      "default": "random",
+      "type": "string"
+    },
+    "seed": {
+      "title": "Seed",
+      "description": "Seed used for random number generation in the optimizer. Set to -1 for no seed.",
+      "default": 42,
+      "type": "integer"
+    },
+    "number_of_optimization_rounds": {
+      "title": "Number Of Optimization Rounds",
+      "description": "Maximum number of optimization rounds.",
+      "default": 1,
+      "type": "integer"
+    },
+    "sampling_variance": {
+      "title": "Sampling Variance",
+      "description": "Variance of the Gaussian noise applied during sampling from the optimal point.",
+      "default": 0.1,
+      "type": "number"
+    },
+    "samples_for_evaluation": {
+      "title": "Samples For Evaluation",
+      "description": "Number of samples averaged for each minimization function evaluation.",
+      "default": 4,
+      "type": "integer"
+    },
+    "maximum_number_of_sampling_steps": {
+      "title": "Maximum Number Of Sampling Steps",
+      "description": "Maximum number of sampling steps in an optimization round.",
+      "default": 32,
+      "type": "integer"
+    }
+  },
+  "required_parameters": [],
+  "category": "generation",
+  "sub_category": "generates",
+  "wheel_package": "",
+  "GPU": true,
+  "persistent": true,
+  "help": ""
+}
