@@ -1,3 +1,5 @@
+"""This library calls generation processes remotely on a given host"""
+
 import json
 from pathlib import Path
 import glob
@@ -82,7 +84,6 @@ class service_requester:
     valid_services = ["property", "prediction", "generation", "training"]
 
     def __init__(self) -> None:
-        # ALL_AVAILABLE_SERVICES.extend(get_services())
         pass
 
     def is_valid_service_request(self, request) -> bool:
@@ -99,7 +100,6 @@ class service_requester:
 
         for service in ALL_AVAILABLE_SERVICES:
             current_service = None
-
             if (
                 service["service_type"] == request["service_type"]
                 and service["service_name"] == request["service_name"]
@@ -111,22 +111,8 @@ class service_requester:
         if current_service is None:
             print("service mismatch")
             return None
-        if current_service["service_name"] in [
-            "get molecule organtox",
-            "get molecule clintox",
-            "get molecule tox21",
-            "get molecule sider",
-            "get molecule askos",
-            "get molecule docking",
-            "get molecule docking_tdc",
-            "get molecule molformer_regression",
-            "get molecule molformer_multitask_classification",
-        ]:
+        if current_service["service_name"] in []:
             return [current_service["service_name"] + "   Not Currently Available"]
-        """ if category == "properties":
-            if self.property_requestor == None:
-                self.property_requestor = request_properties()
-            result = self.property_requestor.request(request["service_type"], request["parameters"], request["api_key"])"""
 
         if "sample_size" in request:
             try:
@@ -136,6 +122,7 @@ class service_requester:
                 SAMPLE_SIZE = 10
         else:
             SAMPLE_SIZE = 10
+
         if category == "generation":
             if self.property_requestor == None:
                 self.property_requestor = request_generation()
@@ -174,7 +161,6 @@ class request_generation:
 
     def request(self, generator_application, parameters: dict, apikey: str, sample_size=10):
         results = []
-        model = None
         print("generator_application :" + generator_application + " params" + str(parameters))
         generator_type = get_generator_type(generator_application, parameters)
         if len(parameters["subjects"]) > 0:
@@ -189,39 +175,36 @@ class request_generation:
             result = {"exception": str(e)}
             result = {"error": result}
             return result
-        # get handle to generator, if there is not one for the specific propoerty type and Parameter combination then create on
-        # for handle in self.Generator_cache:
-        #    if handle["parms"] == parms and handle["generator_type"] == generator_type:
-        #        model = handle["generator"]
-        if model is None:
-            print(generator_type)
-            parms.update(generator_type)
-            print(parms)
-            try:
-                if "target" in parms:
-                    target = copy.deepcopy(parms["target"])
-                    parms.pop("target")
-                    if isinstance(target, list):
-                        if len(target) == 1:
-                            target = target[0]
-                    print("-----------------------------------------")
-                    print(parms)
-                    print("-----------------------------------------")
-                    print(target)
-                    print(sample_size)
-                    print("-----------------------------------------")
 
-                    model = GeneratorRegistry.get_application_instance(**parms, target=target)
+        print(generator_type)
+        parms.update(generator_type)
+        print(parms)
 
-                else:
-                    model = GeneratorRegistry.get_application_instance(**parms)
-            except Exception as e:
-                exc_type, exc_obj, exc_tb = sys.exc_info()
-                fname = "\n".join(os.path.split(exc_tb.tb_frame.f_code.co_filename))
-                result = {"exception": str(exc_type) + "\n" + str(fname) + "\n" + str(exc_tb.tb_lineno)}
-                result = {"error": result}
-                return result
-            # self.Generator_cache.append({"generator_type"""": generator_type, "parms": parms, "generator": model})
+        try:
+            if "target" in parms:
+                target = copy.deepcopy(parms["target"])
+                parms.pop("target")
+                if isinstance(target, list):
+                    if len(target) == 1:
+                        target = target[0]
+                print("-----------------------------------------")
+                print(parms)
+                print("-----------------------------------------")
+                print(target)
+                print(sample_size)
+                print("-----------------------------------------")
+
+                model = GeneratorRegistry.get_application_instance(**parms, target=target)
+            else:
+                model = GeneratorRegistry.get_application_instance(**parms)
+
+        except Exception as e:
+            exc_type, exc_obj, exc_tb = sys.exc_info()
+            fname = "\n".join(os.path.split(exc_tb.tb_frame.f_code.co_filename))
+            result = {"exception": str(exc_type) + "\n" + str(fname) + "\n" + str(exc_tb.tb_lineno)}
+            result = {"error": result}
+            return result
+
         try:
             result = list(model.sample(sample_size))
             result = pd.DataFrame(result)
@@ -231,6 +214,7 @@ class request_generation:
         except OSError as e:
             result = e
             result = {"error": result}
+
         return result
 
     def set_parms(self, generator_type, parameters):
@@ -262,11 +246,6 @@ class request_generation:
 
         return copy.deepcopy(request_params)
 
-    def algorithm_is_valid(self, algorithm, algorithm_version):
-        return True
-
-
-# app = service_requester.options(route_prefix="/route_service").bind()
 
 if __name__ == "__main__":
     from datetime import datetime
