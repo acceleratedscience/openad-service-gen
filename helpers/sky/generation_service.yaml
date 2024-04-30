@@ -7,7 +7,7 @@ resources:
   # Optional; if left out, automatically pick the cheapest cloud.
   ports: 8090
   cloud: aws
-  cpus: 4+
+  cpus: 12+
   memory: 10+
   disk_size: 100
   accelerators: V100:1
