@@ -1,1 +1,57 @@
-{"service_type": "generate_data", "description": "Configuration to generate molecules using an adversarial autoencoder.", "target": {"title": "Target for generation", "type": "object", "description": "Optional target for generation."}, "generator_type": {"algorithm_application": "AaeGenerator", "domain": "materials", "algorithm_name": "MosesGenerator", "algorithm_type": "conditional_generation"}, "algorithm_versions": ["logp_and_synthesizability", "v0"], "service_name": "generate with AaeGenerator", "service_description": "", "valid_types": ["AaeGenerator"], "type_description": {}, "parameters": {"algorithm_version": {"title": "Algorithm Version", "default": "v0", "type": "string"}, "n_samples": {"title": "N Samples", "description": "Number of SMILES to generate", "default": 20, "type": "integer"}, "n_batch": {"title": "N Batch", "description": "Batch size for the optimization", "default": 1024, "type": "integer"}, "max_len": {"title": "Max Len", "description": "Maximum length of the generated SMILES", "default": 100, "type": "integer"}}, "required_parameters": [], "category": "generation", "sub_category": "generates", "wheel_package": "", "GPU": true, "persistent": true, "help": ""}
+{
+    "service_type": "generate_data",
+    "description": "Configuration to generate molecules using an adversarial autoencoder.",
+    "target": {
+        "title": "Target for generation",
+        "type": "object",
+        "description": "Optional target for generation."
+    },
+    "generator_type": {
+        "algorithm_application": "AaeGenerator",
+        "domain": "materials",
+        "algorithm_name": "MosesGenerator",
+        "algorithm_type": "conditional_generation"
+    },
+    "algorithm_versions": [
+        "logp_and_synthesizability",
+        "v0"
+    ],
+    "service_name": "generate with AaeGenerator",
+    "service_description": "",
+    "valid_types": [
+        "AaeGenerator"
+    ],
+    "type_description": {},
+    "parameters": {
+        "algorithm_version": {
+            "title": "Algorithm Version",
+            "default": "v0",
+            "type": "string"
+        },
+        "n_samples": {
+            "title": "N Samples",
+            "description": "Number of SMILES to generate",
+            "default": 20,
+            "type": "integer"
+        },
+        "n_batch": {
+            "title": "N Batch",
+            "description": "Batch size for the optimization",
+            "default": 1024,
+            "type": "integer"
+        },
+        "max_len": {
+            "title": "Max Len",
+            "description": "Maximum length of the generated SMILES",
+            "default": 100,
+            "type": "integer"
+        }
+    },
+    "required_parameters": [],
+    "category": "generation",
+    "sub_category": "generates",
+    "wheel_package": "",
+    "GPU": true,
+    "persistent": true,
+    "help": ""
+}

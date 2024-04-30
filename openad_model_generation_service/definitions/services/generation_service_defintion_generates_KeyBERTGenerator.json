@@ -1,1 +1,90 @@
-{"service_type": "generate_data", "description": "Configuration to generate keywords.\n\n    If the  model is not found in the cache, models are collected from https://www.sbert.net/docs/pretrained_models.html.\n    distilbert-base-nli-stsb-mean-tokens is recommended for english, while xlm-r-bert-base-nli-stsb-mean-tokens for all\n    other languages as it support 100+ languages.\n    ", "target": {"title": "Text to analyze", "description": "Text considered for the keyword generation task.", "type": "string"}, "generator_type": {"algorithm_application": "KeyBERTGenerator", "domain": "nlp", "algorithm_name": "KeywordBERTGenerationAlgorithm", "algorithm_type": "conditional_generation"}, "algorithm_versions": ["circa_bert_cls_v0", "circa_bert_v2", "circa_bert_v2_cls", "circa_scibert_cls", "distilbert-base-nli-mean-tokens"], "service_name": "generate with KeyBERTGenerator", "service_description": "", "valid_types": ["KeyBERTGenerator"], "type_description": {}, "parameters": {"algorithm_version": {"title": "Algorithm Version", "default": "distilbert-base-nli-mean-tokens", "type": "string"}, "minimum_keyphrase_ngram": {"title": "Minimum Keyphrase Ngram", "description": "Lower bound for phrase size.", "default": 1, "type": "integer"}, "maximum_keyphrase_ngram": {"title": "Maximum Keyphrase Ngram", "description": "Upper bound for phrase size.", "default": 2, "type": "integer"}, "stop_words": {"title": "Stop Words", "description": "Language for the stop words removal.", "default": "english", "type": "string"}, "top_n": {"title": "Top N", "description": "Number of keywords to extract.", "default": 10, "type": "integer"}, "use_maxsum": {"title": "Use Maxsum", "description": "Control usage of max sum similarity for keywords generated.", "default": false, "type": "boolean"}, "use_mmr": {"title": "Use Mmr", "description": "Control usage of max marginal relevance for keywords generated.", "default": false, "type": "boolean"}, "diversity": {"title": "Diversity", "description": "Diversity for the results when enabling use_mmr.", "default": 0.5, "type": "number"}, "number_of_candidates": {"title": "Number Of Candidates", "description": "Candidates considered when enabling use_maxsum.", "default": 20, "type": "integer"}}, "required_parameters": [], "category": "generation", "sub_category": "generates", "wheel_package": "", "GPU": true, "persistent": true, "help": ""}
+{
+    "service_type": "generate_data",
+    "description": "Configuration to generate keywords.\n\n    If the  model is not found in the cache, models are collected from https://www.sbert.net/docs/pretrained_models.html.\n    distilbert-base-nli-stsb-mean-tokens is recommended for english, while xlm-r-bert-base-nli-stsb-mean-tokens for all\n    other languages as it support 100+ languages.\n    ",
+    "target": {
+        "title": "Text to analyze",
+        "description": "Text considered for the keyword generation task.",
+        "type": "string"
+    },
+    "generator_type": {
+        "algorithm_application": "KeyBERTGenerator",
+        "domain": "nlp",
+        "algorithm_name": "KeywordBERTGenerationAlgorithm",
+        "algorithm_type": "conditional_generation"
+    },
+    "algorithm_versions": [
+        "circa_bert_cls_v0",
+        "circa_bert_v2",
+        "circa_bert_v2_cls",
+        "circa_scibert_cls",
+        "distilbert-base-nli-mean-tokens"
+    ],
+    "service_name": "generate with KeyBERTGenerator",
+    "service_description": "",
+    "valid_types": [
+        "KeyBERTGenerator"
+    ],
+    "type_description": {},
+    "parameters": {
+        "algorithm_version": {
+            "title": "Algorithm Version",
+            "default": "distilbert-base-nli-mean-tokens",
+            "type": "string"
+        },
+        "minimum_keyphrase_ngram": {
+            "title": "Minimum Keyphrase Ngram",
+            "description": "Lower bound for phrase size.",
+            "default": 1,
+            "type": "integer"
+        },
+        "maximum_keyphrase_ngram": {
+            "title": "Maximum Keyphrase Ngram",
+            "description": "Upper bound for phrase size.",
+            "default": 2,
+            "type": "integer"
+        },
+        "stop_words": {
+            "title": "Stop Words",
+            "description": "Language for the stop words removal.",
+            "default": "english",
+            "type": "string"
+        },
+        "top_n": {
+            "title": "Top N",
+            "description": "Number of keywords to extract.",
+            "default": 10,
+            "type": "integer"
+        },
+        "use_maxsum": {
+            "title": "Use Maxsum",
+            "description": "Control usage of max sum similarity for keywords generated.",
+            "default": false,
+            "type": "boolean"
+        },
+        "use_mmr": {
+            "title": "Use Mmr",
+            "description": "Control usage of max marginal relevance for keywords generated.",
+            "default": false,
+            "type": "boolean"
+        },
+        "diversity": {
+            "title": "Diversity",
+            "description": "Diversity for the results when enabling use_mmr.",
+            "default": 0.5,
+            "type": "number"
+        },
+        "number_of_candidates": {
+            "title": "Number Of Candidates",
+            "description": "Candidates considered when enabling use_maxsum.",
+            "default": 20,
+            "type": "integer"
+        }
+    },
+    "required_parameters": [],
+    "category": "generation",
+    "sub_category": "generates",
+    "wheel_package": "",
+    "GPU": true,
+    "persistent": true,
+    "help": ""
+}

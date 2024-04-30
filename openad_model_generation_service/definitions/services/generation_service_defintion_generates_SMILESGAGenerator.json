@@ -1,1 +1,86 @@
-{"service_type": "generate_data", "description": "Configuration to generate optimizied molecules using SMILES Genetic algorithm", "target": {"title": "Scoring functions with parameters", "description": "Scoring functions will be used to generate a score for SMILES.", "type": "object"}, "generator_type": {"algorithm_application": "SMILESGAGenerator", "domain": "materials", "algorithm_name": "GuacaMolGenerator", "algorithm_type": "conditional_generation"}, "algorithm_versions": ["v0"], "service_name": "generate with SMILESGAGenerator", "service_description": "", "valid_types": ["SMILESGAGenerator"], "type_description": {}, "parameters": {"algorithm_version": {"title": "Algorithm Version", "default": "v0", "type": "string"}, "batch_size": {"title": "Batch Size", "description": "Batch size used for the generative model sampling.", "default": 32, "type": "integer"}, "population_size": {"title": "Population Size", "description": "it is used with n_mutations for the initial generation of smiles within the population", "default": 100, "type": "integer"}, "n_mutations": {"title": "N Mutations", "description": "it is used with population size for the initial generation of smiles within the population", "default": 200, "type": "integer"}, "n_jobs": {"title": "N Jobs", "description": "number of concurrently running jobs", "default": -1, "type": "integer"}, "gene_size": {"title": "Gene Size", "description": "size of the gene which is used in creation of genes", "default": 2, "type": "integer"}, "random_start": {"title": "Random Start", "description": "set to True to randomly choose list of SMILES for generating optimizied molecules", "default": false, "type": "boolean"}, "generations": {"title": "Generations", "description": "number of evolutionary generations", "default": 2, "type": "integer"}, "patience": {"title": "Patience", "description": "it is used for early stopping if population scores remains the same after generating molecules", "default": 4, "type": "integer"}}, "required_parameters": [], "category": "generation", "sub_category": "generates", "wheel_package": "", "GPU": true, "persistent": true, "help": ""}
+{
+    "service_type": "generate_data",
+    "description": "Configuration to generate optimizied molecules using SMILES Genetic algorithm",
+    "target": {
+        "title": "Scoring functions with parameters",
+        "description": "Scoring functions will be used to generate a score for SMILES.",
+        "type": "object"
+    },
+    "generator_type": {
+        "algorithm_application": "SMILESGAGenerator",
+        "domain": "materials",
+        "algorithm_name": "GuacaMolGenerator",
+        "algorithm_type": "conditional_generation"
+    },
+    "algorithm_versions": [
+        "v0"
+    ],
+    "service_name": "generate with SMILESGAGenerator",
+    "service_description": "",
+    "valid_types": [
+        "SMILESGAGenerator"
+    ],
+    "type_description": {},
+    "parameters": {
+        "algorithm_version": {
+            "title": "Algorithm Version",
+            "default": "v0",
+            "type": "string"
+        },
+        "batch_size": {
+            "title": "Batch Size",
+            "description": "Batch size used for the generative model sampling.",
+            "default": 32,
+            "type": "integer"
+        },
+        "population_size": {
+            "title": "Population Size",
+            "description": "it is used with n_mutations for the initial generation of smiles within the population",
+            "default": 100,
+            "type": "integer"
+        },
+        "n_mutations": {
+            "title": "N Mutations",
+            "description": "it is used with population size for the initial generation of smiles within the population",
+            "default": 200,
+            "type": "integer"
+        },
+        "n_jobs": {
+            "title": "N Jobs",
+            "description": "number of concurrently running jobs",
+            "default": -1,
+            "type": "integer"
+        },
+        "gene_size": {
+            "title": "Gene Size",
+            "description": "size of the gene which is used in creation of genes",
+            "default": 2,
+            "type": "integer"
+        },
+        "random_start": {
+            "title": "Random Start",
+            "description": "set to True to randomly choose list of SMILES for generating optimizied molecules",
+            "default": false,
+            "type": "boolean"
+        },
+        "generations": {
+            "title": "Generations",
+            "description": "number of evolutionary generations",
+            "default": 2,
+            "type": "integer"
+        },
+        "patience": {
+            "title": "Patience",
+            "description": "it is used for early stopping if population scores remains the same after generating molecules",
+            "default": 4,
+            "type": "integer"
+        }
+    },
+    "required_parameters": [],
+    "category": "generation",
+    "sub_category": "generates",
+    "wheel_package": "",
+    "GPU": true,
+    "persistent": true,
+    "help": ""
+}
