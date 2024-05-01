@@ -50,6 +50,6 @@ ENV PATH="/src/.venv/bin:$PATH"
 # install root package
 RUN poetry --directory=/src/ install --only main
 
-EXPOSE 8080 80
+EXPOSE 8080 8090 80
 
 CMD ["/src/.venv/bin/python", "/src/openad_model_generation_service/service.py"]
