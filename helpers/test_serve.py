@@ -3,7 +3,7 @@ import pandas as pd
 import helpers.sample_request as sample_request
 
 
-Endpoint = "http://0.0.0.0:8090"
+Endpoint = "http://0.0.0.0:8080"
 
 
 for test in sample_request.tests:

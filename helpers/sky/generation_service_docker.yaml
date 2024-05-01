@@ -7,7 +7,7 @@ service:
 
 resources:
   # Optional; if left out, automatically pick the cheapest cloud.
-  ports: 8090
+  ports: 8080
   cloud: aws
   cpus: 12+
   memory: 10+
@@ -44,5 +44,5 @@ setup: |
 # Invoked under the workdir (i.e., can use its files).
 run: |
   docker run --rm \
-    -p 8090:8090 \
+    -p 8080:8080 \
     generation-service
