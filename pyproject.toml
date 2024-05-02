@@ -6,16 +6,6 @@ description = "Openad_model_Service  properties core service"
 authors = ["Daniel Choi <choi@ibm.com>", "Phil Downey <Phil.Downey1@ibm.com>", "Brian Duenas <Brian.Duenas@ibm.com>"]
 readme = "Readme.md"
 
-[[tool.poetry.source]]
-name = "torch-cpu"
-url = "https://download.pytorch.org/whl/cpu"
-priority = "supplemental"
-
-[[tool.poetry.source]]
-name = "torch-cu118"
-url = "https://download.pytorch.org/whl/cu118"
-priority = "supplemental"
-
 [tool.poetry.dependencies]
 scipy = "^1.12.0"
 fastapi = "0.108.0"
@@ -27,22 +17,6 @@ gt4sd-trainer-hf-pl = "1.0.0"
 scikit-optimize = "0.10.1"
 # if running default gt4sd_guacamol Services
 gt4sd-inference-all = { git = "https://github.com/acceleratedscience/Open-AD-Model-Service", subdirectory = "openad-model-inference/gt4sd_inference_all", branch = "main" }
-
-
-#automatically loads through dependancies
-#toxsmi = {git = "https://github.com/PhillipDowney/chemical_representation_learning_for_toxicity_prediction", rev="0.0.3" , optional = false}
-#pytoda = { git = "https://github.com/PhillipDowney/paccmann_datasets" ,rev = "1.1.3",optional = false }
-
-# if running paccman related Services
-#paccmann_chemistry = {git =  "https://github.com/PhillipDowney/paccmann_chemistry", rev = "0.0.4" , optional = false}
-
-#paccmann_generator = {git =  "https://github.com/PhillipDowney/paccmann_generator",rev = "0.0.2", optional = false}
-
-#paccmann_predictor = {git = "https://github.com/PhillipDowney/paccmann_predictor", rev = "0.0.2" ,optional = false}
-
-#paccmann_omics = {git =  "https://github.com/PaccMann/paccmann_omics" , optional = false}
-
-paccmann_gp = {git = "https://github.com/PaccMann/paccmann_gp" , optional = false}
 
 reinvent-chemistry = "0.0.51"
 python = ">=3.9,<3.11"
