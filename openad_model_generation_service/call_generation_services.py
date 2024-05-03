@@ -180,30 +180,30 @@ class request_generation:
         parms.update(generator_type)
         print(parms)
 
-        try:
-            if "target" in parms:
-                target = copy.deepcopy(parms["target"])
-                parms.pop("target")
-                if isinstance(target, list):
-                    if len(target) == 1:
-                        target = target[0]
-                print("-----------------------------------------")
-                print(parms)
-                print("-----------------------------------------")
-                print(target)
-                print(sample_size)
-                print("-----------------------------------------")
+        # try:
+        if "target" in parms:
+            target = copy.deepcopy(parms["target"])
+            parms.pop("target")
+            if isinstance(target, list):
+                if len(target) == 1:
+                    target = target[0]
+            print("-----------------------------------------")
+            print(parms)
+            print("-----------------------------------------")
+            print(target)
+            print(sample_size)
+            print("-----------------------------------------")
 
-                model = GeneratorRegistry.get_application_instance(**parms, target=target)
-            else:
-                model = GeneratorRegistry.get_application_instance(**parms)
+            model = GeneratorRegistry.get_application_instance(**parms, target=target)
+        else:
+            model = GeneratorRegistry.get_application_instance(**parms)
 
-        except Exception as e:
-            exc_type, exc_obj, exc_tb = sys.exc_info()
-            fname = "\n".join(os.path.split(exc_tb.tb_frame.f_code.co_filename))
-            result = {"exception": str(exc_type) + "\n" + str(fname) + "\n" + str(exc_tb.tb_lineno)}
-            result = {"error": result}
-            return result
+        # except Exception as e:
+        #    exc_type, exc_obj, exc_tb = sys.exc_info()
+        #    fname = "\n".join(os.path.split(exc_tb.tb_frame.f_code.co_filename))
+        #    result = {"exception": str(exc_type) + "\n" + str(fname) + "\n" + str(exc_tb.tb_lineno)}
+        #    result = {"error": result}
+        #    return result
 
         try:
             result = list(model.sample(sample_size))

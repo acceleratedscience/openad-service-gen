@@ -18,10 +18,14 @@ scikit-optimize = "0.10.1"
 # if running default gt4sd_guacamol Services
 gt4sd-inference-all = { git = "https://github.com/acceleratedscience/Open-AD-Model-Service", subdirectory = "openad-model-inference/gt4sd_inference_all", branch = "main" }
 
+cuda-python = "11.8.3"
+
 reinvent-chemistry = "0.0.51"
 python = ">=3.9,<3.11"
 pytest = "8.0.2"
 tape-proteins = ">=0.5"
+
+
 
 [tool.poetry.extras]
 

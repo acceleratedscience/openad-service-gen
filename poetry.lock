@@ -896,6 +896,28 @@ test = ["certifi", "pretend", "pytest (>=6.2.0)", "pytest-benchmark", "pytest-co
 test-randomorder = ["pytest-randomly"]
 
 [[package]]
+name = "cuda-python"
+version = "11.8.3"
+description = "Python bindings for CUDA"
+optional = false
+python-versions = "*"
+files = [
+    {file = "cuda_python-11.8.3-cp310-cp310-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:2f076369ed57ad60c34e2b29b098ad9bee44b370322e9bd2c48ec1723a3c7602"},
+    {file = "cuda_python-11.8.3-cp310-cp310-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:508c557cb388951624542d770a724ba58c8f04f28a6d5b604c84eb21f0d4b0e7"},
+    {file = "cuda_python-11.8.3-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:220b21a95071a17a7556183db4c3d96749beee00f3cdc7e5f7e23610f201cf82"},
+    {file = "cuda_python-11.8.3-cp310-cp310-win_amd64.whl", hash = "sha256:d4e8c04de8d010603d7dad0254402ff94f201a37d713f1542e2fcc055f82d09d"},
+    {file = "cuda_python-11.8.3-cp311-cp311-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:da807ad47a35ef3f314a07654813fbed636c773aec288dfb064c43a4b7d13d4a"},
+    {file = "cuda_python-11.8.3-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:81fd593997a95a317b50e687382779ce067a04d09bc6705c9c39d71c01b644da"},
+    {file = "cuda_python-11.8.3-cp311-cp311-win_amd64.whl", hash = "sha256:1be5377227cc3af975ec17e3f9b9d1637946660d0bc01042e1d87c92ee9e3135"},
+    {file = "cuda_python-11.8.3-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:2be241bbe8910d442d04a93621d6cfd9a7e365f9d3658d9d9a7898555504b38f"},
+    {file = "cuda_python-11.8.3-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:789cbdc13dbd4430d02b808f6ae8c48b9371e00d0d16f6ba4c23d8902deb801d"},
+    {file = "cuda_python-11.8.3-cp312-cp312-win_amd64.whl", hash = "sha256:f87449a413c1b9b1656ba5c387af0766d19fd147884176b6a49cd24adfe5ef5a"},
+    {file = "cuda_python-11.8.3-cp39-cp39-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:36638aebfd9f4a8a5988aed10be91f0c825f8d03f463010fbb1b0ac323738b3a"},
+    {file = "cuda_python-11.8.3-cp39-cp39-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:667a6ae979d671f7831090ed176c5c41e3c704caf5ec7827987f4347f6b90c5b"},
+    {file = "cuda_python-11.8.3-cp39-cp39-win_amd64.whl", hash = "sha256:0939b8c1018ae007fca380882eefa19e848bb01b15c37ef8658d5dd837646947"},
+]
+
+[[package]]
 name = "cycler"
 version = "0.12.1"
 description = "Composable style cycles"
@@ -1764,7 +1786,7 @@ transformers = "^4.38.2"
 type = "git"
 url = "https://github.com/acceleratedscience/Open-AD-Model-Service"
 reference = "main"
-resolved_reference = "5d666b7b344943041270ed3360f84c7a4f23fac5"
+resolved_reference = "2a0828f70bce187152961ab8fed2bb8242532755"
 subdirectory = "openad-model-inference/gt4sd_common"
 
 [[package]]
@@ -1789,7 +1811,7 @@ mols2grid = "*"
 type = "git"
 url = "https://github.com/acceleratedscience/Open-AD-Model-Service"
 reference = "main"
-resolved_reference = "5d666b7b344943041270ed3360f84c7a4f23fac5"
+resolved_reference = "2a0828f70bce187152961ab8fed2bb8242532755"
 subdirectory = "openad-model-inference/gt4sd_inference_all"
 
 [[package]]
@@ -1816,7 +1838,7 @@ torch = [
 type = "git"
 url = "https://github.com/acceleratedscience/Open-AD-Model-Service"
 reference = "main"
-resolved_reference = "5d666b7b344943041270ed3360f84c7a4f23fac5"
+resolved_reference = "2a0828f70bce187152961ab8fed2bb8242532755"
 subdirectory = "openad-model-inference/gt4sd_guacamol"
 
 [[package]]
@@ -1836,7 +1858,7 @@ molecule_generation = ">=0.4.1"
 type = "git"
 url = "https://github.com/acceleratedscience/Open-AD-Model-Service"
 reference = "main"
-resolved_reference = "5d666b7b344943041270ed3360f84c7a4f23fac5"
+resolved_reference = "2a0828f70bce187152961ab8fed2bb8242532755"
 subdirectory = "openad-model-inference/gt4sd_moler"
 
 [[package]]
@@ -1865,7 +1887,7 @@ toxsmi = {git = "https://github.com/PhillipDowney/chemical_representation_learni
 type = "git"
 url = "https://github.com/acceleratedscience/Open-AD-Model-Service"
 reference = "main"
-resolved_reference = "5d666b7b344943041270ed3360f84c7a4f23fac5"
+resolved_reference = "2a0828f70bce187152961ab8fed2bb8242532755"
 subdirectory = "openad-model-inference/gt4sd_paccmann"
 
 [[package]]
@@ -1889,7 +1911,7 @@ terminator = {git = "https://github.com/PhillipDowney/regression-transformer", r
 type = "git"
 url = "https://github.com/acceleratedscience/Open-AD-Model-Service"
 reference = "main"
-resolved_reference = "5d666b7b344943041270ed3360f84c7a4f23fac5"
+resolved_reference = "2a0828f70bce187152961ab8fed2bb8242532755"
 subdirectory = "openad-model-inference/gt4sd_regression"
 
 [[package]]
@@ -1909,7 +1931,7 @@ reinvent_models = {git = "https://github.com/GT4SD/reinvent_models", rev = "v0.0
 type = "git"
 url = "https://github.com/acceleratedscience/Open-AD-Model-Service"
 reference = "main"
-resolved_reference = "5d666b7b344943041270ed3360f84c7a4f23fac5"
+resolved_reference = "2a0828f70bce187152961ab8fed2bb8242532755"
 subdirectory = "openad-model-inference/gt4sd_reinvent"
 
 [[package]]
@@ -1945,7 +1967,7 @@ torchdrug = ">=0.2.0"
 type = "git"
 url = "https://github.com/acceleratedscience/Open-AD-Model-Service"
 reference = "main"
-resolved_reference = "5d666b7b344943041270ed3360f84c7a4f23fac5"
+resolved_reference = "2a0828f70bce187152961ab8fed2bb8242532755"
 subdirectory = "openad-model-inference/gt4sd_torch"
 
 [[package]]
@@ -8516,4 +8538,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.9,<3.11"
-content-hash = "0761f4f1b126ec0b71e8cb1aee947011d81d2121148f254435543e3824b48ed7"
+content-hash = "78ba5d83a2e39d5c84c1cd7958bb184baaa9343d2aff9b3f3e4a9e4bb8ee4a93"
