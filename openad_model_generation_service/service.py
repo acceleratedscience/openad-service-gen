@@ -1,9 +1,8 @@
-from fastapi import FastAPI, HTTPException, Request, status
-from fastapi.responses import HTMLResponse, RedirectResponse, FileResponse
-from fastapi.staticfiles import StaticFiles
+from fastapi import FastAPI, HTTPException
+from fastapi.responses import HTMLResponse, JSONResponse
 from call_generation_services import service_requester
-from pydantic import BaseModel
-
+import torch
+import time
 
 app = FastAPI()
 
@@ -16,10 +15,21 @@ async def health():
 
 
 @app.post("/service")
-def service(property_request: dict):
-    result = requester.route_service(property_request)
+async def service(property_request: dict):
+    try:
+        start = time.time()
+        result = await requester.route_service(property_request)
+        print(f"---finished in {time.time()-start:.2f} seconds---")
+        torch.cuda.empty_cache()
+        return result
+    except Exception as e:
+        torch.cuda.empty_cache()
+        raise HTTPException(status_code=500, detail=str(e))
 
-    return result
+
+@app.exception_handler(HTTPException)
+async def generic_exception_handler(request, exc):
+    return JSONResponse(status_code=exc.status_code, content={"message": exc.detail})
 
 
 def main():
