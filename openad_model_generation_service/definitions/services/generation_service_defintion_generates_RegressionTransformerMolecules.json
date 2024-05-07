@@ -1,97 +1,97 @@
 {
-    "service_type": "generate_data",
-    "description": "\n    Configuration to generate molecules given a continuous property target and a molecular sub-structure.\n\n    Implementation from the paper: https://arxiv.org/abs/2202.01338.\n\n    Examples:\n        An example for generating a peptide around a desired property value::\n\n            config = RegressionTransformerMolecules(\n                algorithm_version='solubility', search='sample', temperature=2, tolerance=5\n            )\n            target = \"<esol>-3.534|[Br][C][=C][C][MASK][MASK][=C][C][=C][C][=C][Ring1][MASK][MASK][Branch2_3][Ring1][Branch1_2]\"\n            solubility_generator = RegressionTransformer(\n                configuration=config, target=target\n            )\n            list(solubility_generator.sample(5))\n\n        An example for predicting the solubility of a molecule::\n\n            config = RegressionTransformerMolecules(\n                algorithm_version='solubility', search='greedy'\n            )\n            target = \"<esol>[MASK][MASK][MASK][MASK][MASK]|[Cl][C][Branch1_2][Branch1_2][=C][Branch1_1][C][Cl][Cl][Cl]\"\n            solubility_generator = RegressionTransformer(\n                configuration=config, target=target\n            )\n            list(solubility_generator.sample(1))\n    ",
-    "target": {
-        "title": "Masked input sequence",
-        "description": "A sequence with a property value and a SELFIES string. Masking can either occur on the property or on the SELFIES, but not both.For the scale of the property values, please see the task/dataset.",
-        "type": "string"
-    },
-    "generator_type": {
-        "algorithm_application": "RegressionTransformerMolecules",
-        "domain": "materials",
-        "algorithm_name": "RegressionTransformer",
-        "algorithm_type": "conditional_generation"
-    },
-    "algorithm_versions": [
-        "block_copolymer",
-        "cosmo_acdl",
-        "crippen_logp",
-        "logp_and_synthesizability",
-        "mpro",
-        "pfas",
-        "qed",
-        "rop_catalyst",
+  "service_type": "generate_data",
+  "description": "\n    Configuration to generate molecules given a continuous property target and a molecular sub-structure.\n\n    Implementation from the paper: https://arxiv.org/abs/2202.01338.\n\n    Examples:\n        An example for generating a peptide around a desired property value::\n\n            config = RegressionTransformerMolecules(\n                algorithm_version='solubility', search='sample', temperature=2, tolerance=5\n            )\n            target = \"<esol>-3.534|[Br][C][=C][C][MASK][MASK][=C][C][=C][C][=C][Ring1][MASK][MASK][Branch2_3][Ring1][Branch1_2]\"\n            solubility_generator = RegressionTransformer(\n                configuration=config, target=target\n            )\n            list(solubility_generator.sample(5))\n\n        An example for predicting the solubility of a molecule::\n\n            config = RegressionTransformerMolecules(\n                algorithm_version='solubility', search='greedy'\n            )\n            target = \"<esol>[MASK][MASK][MASK][MASK][MASK]|[Cl][C][Branch1_2][Branch1_2][=C][Branch1_1][C][Cl][Cl][Cl]\"\n            solubility_generator = RegressionTransformer(\n                configuration=config, target=target\n            )\n            list(solubility_generator.sample(1))\n    ",
+  "target": {
+    "title": "Masked input sequence",
+    "description": "A sequence with a property value and a SELFIES string. Masking can either occur on the property or on the SELFIES, but not both.For the scale of the property values, please see the task/dataset.",
+    "type": "string"
+  },
+  "generator_type": {
+    "algorithm_application": "RegressionTransformerMolecules",
+    "domain": "materials",
+    "algorithm_name": "RegressionTransformer",
+    "algorithm_type": "conditional_generation"
+  },
+  "algorithm_versions": [
+    "block_copolymer",
+    "cosmo_acdl",
+    "crippen_logp",
+    "logp_and_synthesizability",
+    "mpro",
+    "pfas",
+    "qed",
+    "rop_catalyst",
+    "solubility",
+    "stability",
+    "uspto"
+  ],
+  "service_name": "generate with RegressionTransformerMolecules",
+  "service_description": "",
+  "valid_types": [
+    "RegressionTransformerMolecules"
+  ],
+  "type_description": {},
+  "parameters": {
+    "algorithm_version": {
+      "title": "Algorithm Version",
+      "description": "The version of the algorithm to use.",
+      "default": "solubility",
+      "options": [
         "solubility",
-        "stability",
-        "uspto"
-    ],
-    "service_name": "generate with RegressionTransformerMolecules",
-    "service_description": "",
-    "valid_types": [
-        "RegressionTransformerMolecules"
-    ],
-    "type_description": {},
-    "parameters": {
-        "algorithm_version": {
-            "title": "Algorithm Version",
-            "description": "The version of the algorithm to use.",
-            "default": "solubility",
-            "options": [
-                "solubility",
-                "qed",
-                "logp_and_synthesizability"
-            ],
-            "type": "string"
-        },
-        "search": {
-            "title": "Search",
-            "description": "Search algorithm to use for the generation: sample or greedy",
-            "default": "sample",
-            "options": [
-                "sample",
-                "greedy"
-            ],
-            "type": "string"
-        },
-        "temperature": {
-            "title": "Temperature",
-            "description": "Temperature parameter for the softmax sampling in decoding.",
-            "default": 1.4,
-            "type": "number"
-        },
-        "batch_size": {
-            "title": "Batch Size",
-            "description": "Batch size for the conditional generation",
-            "default": 8,
-            "type": "integer"
-        },
-        "tolerance": {
-            "title": "Tolerance",
-            "description": "Precision tolerance for the conditional generation task. This is the\n            tolerated eviation between desired/primed property and predicted property of the\n            generated molecule. Given in percentage with respect to the property range encountered\n            during training. Either a single float or a dict of floats with properties as\n            NOTE: The tolerance is *only* used for post-hoc filtering of the generated molecules.\n            ",
-            "default": 20.0,
-            "anyOf": [
-                {
-                    "type": "number"
-                },
-                {
-                    "type": "object",
-                    "additionalProperties": {
-                        "type": "number"
-                    }
-                }
-            ]
-        },
-        "sampling_wrapper": {
-            "title": "Sampling Wrapper",
-            "description": "High-level entry point for SMILES-level access. Provide a\n            dictionary that is used to build a custom sampling wrapper.\n            NOTE: If this is used, the `target` needs to be a single SMILES string.\n            Example: {\n                'fraction_to_mask': 0.5,\n                'tokens_to_mask': [],\n                'property_goal': {'<qed>': 0.85}\n            }\n            - 'fraction_to_mask' specifies the ratio of tokens that can be changed by\n                the model.\n            - 'tokens_to_mask' specifies which atoms can be masked. This defaults\n                to an empty list, meaning that all tokens can be masked.\n            - 'property_goal' specifies the target conditions for the generation. The\n                properties need to be specified as a dictionary. The keys need to be\n                properties supported by the algorithm version.\n            - 'substructures_to_mask': Specifies a list of substructures that should be masked.\n                Given in SMILES format. This is excluded from the stochastic masking.\n                NOTE: The model operates on SELFIES and the matching of the substructures occurs\n                in SELFIES simply on a string level.\n            - 'substructures_to_keep': Specifies a list of substructures that should definitely be kept.\n                Given in SMILES format. This is excluded from the stochastic masking.\n                NOTE: This keeps tokens even if they are included in `tokens_to_mask`.\n                NOTE: The model operates on SELFIES and the matching of the substructures occurs\n                in SELFIES simply on a string level.\n            - `text_filtering`: Generated sequences are post-hoc filtered for the presence of\n                `substructures_to_keep`. This is done with RDKit substructure matches. If the sub-\n                structure cant be converted to a mol object, this argument toggles whether a substructure\n                should be ignored from post-hoc filtering (this happens per default) or whether\n                filtering should occur on a pure string level. Defaults to False.\n                NOTE: This does not affect the actual generation process.\n            ",
-            "type": "object"
-        }
+        "qed",
+        "logp_and_synthesizability"
+      ],
+      "type": "string"
     },
-    "required_parameters": [],
-    "category": "generation",
-    "sub_category": "generates",
-    "wheel_package": "",
-    "GPU": true,
-    "persistent": true,
-    "help": ""
+    "search": {
+      "title": "Search",
+      "description": "Search algorithm to use for the generation: sample or greedy",
+      "default": "sample",
+      "options": [
+        "sample",
+        "greedy"
+      ],
+      "type": "string"
+    },
+    "temperature": {
+      "title": "Temperature",
+      "description": "Temperature parameter for the softmax sampling in decoding.",
+      "default": 1.4,
+      "type": "number"
+    },
+    "batch_size": {
+      "title": "Batch Size",
+      "description": "Batch size for the conditional generation",
+      "default": 8,
+      "type": "integer"
+    },
+    "tolerance": {
+      "title": "Tolerance",
+      "description": "Precision tolerance for the conditional generation task. This is the\n            tolerated eviation between desired/primed property and predicted property of the\n            generated molecule. Given in percentage with respect to the property range encountered\n            during training. Either a single float or a dict of floats with properties as\n            NOTE: The tolerance is *only* used for post-hoc filtering of the generated molecules.\n            ",
+      "default": 20.0,
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "object",
+          "additionalProperties": {
+            "type": "number"
+          }
+        }
+      ]
+    },
+    "sampling_wrapper": {
+      "title": "Sampling Wrapper",
+      "description": "High-level entry point for SMILES-level access. Provide a\n            dictionary that is used to build a custom sampling wrapper.\n            NOTE: If this is used, the `target` needs to be a single SMILES string.\n            Example: {\n                'fraction_to_mask': 0.5,\n                'tokens_to_mask': [],\n                'property_goal': {'<qed>': 0.85}\n            }\n            - 'fraction_to_mask' specifies the ratio of tokens that can be changed by\n                the model.\n            - 'tokens_to_mask' specifies which atoms can be masked. This defaults\n                to an empty list, meaning that all tokens can be masked.\n            - 'property_goal' specifies the target conditions for the generation. The\n                properties need to be specified as a dictionary. The keys need to be\n                properties supported by the algorithm version.\n            - 'substructures_to_mask': Specifies a list of substructures that should be masked.\n                Given in SMILES format. This is excluded from the stochastic masking.\n                NOTE: The model operates on SELFIES and the matching of the substructures occurs\n                in SELFIES simply on a string level.\n            - 'substructures_to_keep': Specifies a list of substructures that should definitely be kept.\n                Given in SMILES format. This is excluded from the stochastic masking.\n                NOTE: This keeps tokens even if they are included in `tokens_to_mask`.\n                NOTE: The model operates on SELFIES and the matching of the substructures occurs\n                in SELFIES simply on a string level.\n            - `text_filtering`: Generated sequences are post-hoc filtered for the presence of\n                `substructures_to_keep`. This is done with RDKit substructure matches. If the sub-\n                structure cant be converted to a mol object, this argument toggles whether a substructure\n                should be ignored from post-hoc filtering (this happens per default) or whether\n                filtering should occur on a pure string level. Defaults to False.\n                NOTE: This does not affect the actual generation process.\n            ",
+      "type": "object"
+    }
+  },
+  "required_parameters": [],
+  "category": "generation",
+  "sub_category": "generates",
+  "wheel_package": "",
+  "GPU": true,
+  "persistent": true,
+  "help": ""
 }

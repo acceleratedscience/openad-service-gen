@@ -22,6 +22,7 @@
 # SOFTWARE.
 #
 """Module initialization for gt4sd_common ."""
+
 from gt4sd_common.extras import EXTRAS_ENABLED
 
 # NOTE: here we import the applications to register them
@@ -61,18 +62,24 @@ except:
     pass
 
 try:
-    from gt4sd_inference_reinvent.algorithms.conditional_generation.reinvent import ReinventGenerator  # noqa: F401
+    from gt4sd_inference_reinvent.algorithms.conditional_generation.reinvent import (
+        ReinventGenerator,
+    )  # noqa: F401
 except:
     pass
 
 try:
-    from gt4sd_inference_paccmann.algorithms.prediction.paccmann import AffinityPredictor  # noqa: F401
+    from gt4sd_inference_paccmann.algorithms.prediction.paccmann import (
+        AffinityPredictor,
+    )  # noqa: F401
 except:
     pass
 
 
 from gt4sd_common.algorithms.conditional_generation.template import TemplateGenerator  # noqa: F401
-from gt4sd_common.algorithms.controlled_sampling.advanced_manufacturing import CatalystGenerator  # noqa: F401
+from gt4sd_common.algorithms.controlled_sampling.advanced_manufacturing import (
+    CatalystGenerator,
+)  # noqa: F401
 
 from gt4sd_common.algorithms.controlled_sampling.paccmann_gp import PaccMannGPGenerator  # noqa: F401
 
@@ -99,8 +106,12 @@ try:
         PGTEditor,
         PGTGenerator,
     )  # noqa: F401
-    from gt4sd_inference_reinvent.algorithms.prediction.topics_zero_shot import TopicsPredictor  # noqa: F401
-    from gt4sd_inference_reinvent.algorithms.generation.polymer_blocks import PolymerBlocksGenerator  # noqa: F401
+    from gt4sd_inference_reinvent.algorithms.prediction.topics_zero_shot import (
+        TopicsPredictor,
+    )  # noqa: F401
+    from gt4sd_inference_reinvent.algorithms.generation.polymer_blocks import (
+        PolymerBlocksGenerator,
+    )  # noqa: F401
 except:
     pass
 
@@ -110,7 +121,10 @@ except:
     pass
 
 try:
-    from gt4sd_inference_torch_drug.algorithms.generation.torchdrug import TorchDrugGCPN, TorchDrugGraphAF  # noqa: F401
+    from gt4sd_inference_torch_drug.algorithms.generation.torchdrug import (
+        TorchDrugGCPN,
+        TorchDrugGraphAF,
+    )  # noqa: F401
 except:
     pass
 try:
@@ -120,12 +134,18 @@ except:
 
 
 try:
-    from gt4sd_inference_paccmann.algorithms.generation.paccmann_vae import PaccMannVAE, PaccMannVAEGenerator
+    from gt4sd_inference_paccmann.algorithms.generation.paccmann_vae import (
+        PaccMannVAE,
+        PaccMannVAEGenerator,
+    )
 except:
     pass
 # extras requirements
 if EXTRAS_ENABLED:
-    from gt4sd_common.algorithms.controlled_sampling.class_controlled_sampling import PAG, CogMol  # noqa: F401
+    from gt4sd_common.algorithms.controlled_sampling.class_controlled_sampling import (
+        PAG,
+        CogMol,
+    )  # noqa: F401
 
 # print(dict(PaccMannGPGenerator))
 

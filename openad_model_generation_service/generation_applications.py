@@ -47,7 +47,9 @@ AVAILABLE_ALGORITHMS_CATEGORIES = {
 }
 
 
-def filter_algorithm_applications(algorithms: List[Dict[str, str]], filters: Dict[str, str]) -> List[Dict[str, str]]:
+def filter_algorithm_applications(
+    algorithms: List[Dict[str, str]], filters: Dict[str, str]
+) -> List[Dict[str, str]]:
     """
     Returning algorithms with given filters.
 
@@ -70,7 +72,9 @@ def filter_algorithm_applications(algorithms: List[Dict[str, str]], filters: Dic
     ]
 
 
-def get_configuration_tuples(algorithms: List[Dict[str, str]]) -> List[ConfigurationTuple]:
+def get_configuration_tuples(
+    algorithms: List[Dict[str, str]],
+) -> List[ConfigurationTuple]:
     """
     Returning configuration tuples from a list of applications.
 

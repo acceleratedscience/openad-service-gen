@@ -1,10 +1,9 @@
 from fastapi import FastAPI, HTTPException, Request, status
 from fastapi.responses import HTMLResponse, RedirectResponse, FileResponse
-from fastapi.staticfiles import StaticFiles
 from call_generation_services import service_requester
-from pydantic import BaseModel
 
 
+print("---starting generation inference service---")
 app = FastAPI()
 
 requester = service_requester()
@@ -29,6 +28,7 @@ def main():
     print(f"\n[i] cuda is available: {torch.cuda.is_available()}\n")
     if torch.cuda.is_available():
         print(f"[i] cuda version: {torch.version.cuda}\n")
+    print(f"[i] device: {torch.cuda.get_device_name(0)}\n")
     uvicorn.run(app, host="0.0.0.0", port=8080)
 
 

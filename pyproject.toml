@@ -26,7 +26,6 @@ pytest = "8.0.2"
 tape-proteins = ">=0.5"
 
 
-
 [tool.poetry.extras]
 
 [tool.poetry.group.dev.dependencies]

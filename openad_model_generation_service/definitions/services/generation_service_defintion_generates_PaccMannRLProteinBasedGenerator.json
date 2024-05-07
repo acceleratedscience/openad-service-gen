@@ -1,56 +1,56 @@
 {
-    "service_type": "generate_data",
-    "description": "\n    Configuration to generate compounds with high affinity to a target protein.\n\n    Implementation from the paper: https://doi.org/10.1088/2632-2153/abe808.\n\n    Example:\n\n    Assuming gt4sd_gen is the service name\n\n    <cmd> gt4sd_gen generate with PaccMannRLProteinBasedGenerator data for 'GSQEVNSNASPEEAEIARKAGATTWTEKGNKWEIRI' sample 20  </cmd>\n\n    ",
-    "target": {
-        "title": "Target protein sequence",
-        "description": "AA sequence of the protein target to generate non-toxic ligands against.",
-        "type": "string"
+  "service_type": "generate_data",
+  "description": "\n    Configuration to generate compounds with high affinity to a target protein.\n\n    Implementation from the paper: https://doi.org/10.1088/2632-2153/abe808.\n\n    Example:\n\n    Assuming gt4sd_gen is the service name\n\n    <cmd> gt4sd_gen generate with PaccMannRLProteinBasedGenerator data for 'GSQEVNSNASPEEAEIARKAGATTWTEKGNKWEIRI' sample 20  </cmd>\n\n    ",
+  "target": {
+    "title": "Target protein sequence",
+    "description": "AA sequence of the protein target to generate non-toxic ligands against.",
+    "type": "string"
+  },
+  "generator_type": {
+    "algorithm_application": "PaccMannRLProteinBasedGenerator",
+    "domain": "materials",
+    "algorithm_name": "PaccMannRL",
+    "algorithm_type": "conditional_generation"
+  },
+  "algorithm_versions": [
+    "v0"
+  ],
+  "service_name": "generate with PaccMannRLProteinBasedGenerator",
+  "service_description": "",
+  "valid_types": [
+    "PaccMannRLProteinBasedGenerator"
+  ],
+  "type_description": {},
+  "parameters": {
+    "algorithm_version": {
+      "title": "Algorithm Version",
+      "default": "v0",
+      "type": "string"
     },
-    "generator_type": {
-        "algorithm_application": "PaccMannRLProteinBasedGenerator",
-        "domain": "materials",
-        "algorithm_name": "PaccMannRL",
-        "algorithm_type": "conditional_generation"
+    "batch_size": {
+      "title": "Batch Size",
+      "description": "Batch size used for the generative model sampling.",
+      "default": 32,
+      "type": "integer"
     },
-    "algorithm_versions": [
-        "v0"
-    ],
-    "service_name": "generate with PaccMannRLProteinBasedGenerator",
-    "service_description": "",
-    "valid_types": [
-        "PaccMannRLProteinBasedGenerator"
-    ],
-    "type_description": {},
-    "parameters": {
-        "algorithm_version": {
-            "title": "Algorithm Version",
-            "default": "v0",
-            "type": "string"
-        },
-        "batch_size": {
-            "title": "Batch Size",
-            "description": "Batch size used for the generative model sampling.",
-            "default": 32,
-            "type": "integer"
-        },
-        "temperature": {
-            "title": "Temperature",
-            "description": "Temperature parameter for the softmax sampling in decoding.",
-            "default": 1.4,
-            "type": "number"
-        },
-        "generated_length": {
-            "title": "Generated Length",
-            "description": "Maximum length in tokens of the generated molcules (relates to the SMILES length).",
-            "default": 100,
-            "type": "integer"
-        }
+    "temperature": {
+      "title": "Temperature",
+      "description": "Temperature parameter for the softmax sampling in decoding.",
+      "default": 1.4,
+      "type": "number"
     },
-    "required_parameters": [],
-    "category": "generation",
-    "sub_category": "generates",
-    "wheel_package": "",
-    "GPU": true,
-    "persistent": true,
-    "help": ""
+    "generated_length": {
+      "title": "Generated Length",
+      "description": "Maximum length in tokens of the generated molcules (relates to the SMILES length).",
+      "default": 100,
+      "type": "integer"
+    }
+  },
+  "required_parameters": [],
+  "category": "generation",
+  "sub_category": "generates",
+  "wheel_package": "",
+  "GPU": true,
+  "persistent": true,
+  "help": ""
 }

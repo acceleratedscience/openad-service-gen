@@ -21,7 +21,7 @@ RUN --mount=type=cache,target=/tmp/poetry_cache \
     PYTHON_KEYRING_BACKEND=keyring.backends.null.Keyring \
     poetry install --only main --no-root
 
-FROM nvidia/cuda:11.8.0-cudnn8-runtime-ubuntu20.04
+FROM nvidia/cuda:11.8.0-cudnn8-devel-ubuntu20.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV TZ=America/Los_Angeles
@@ -44,11 +44,14 @@ RUN pip3 install poetry==1.8.2
 # copy source install requirements
 COPY --from=builder /src/ /src/
 COPY openad_model_generation_service /src/openad_model_generation_service
-COPY Readme.md /src
+COPY Readme.md install_apex.sh /src/
 ENV PATH="/src/.venv/bin:$PATH"
 
 # install root package
 RUN poetry --directory=/src/ install --only main
+
+# takes a long time to build
+RUN /src/install_apex.sh
 
 EXPOSE 8080 80
 
