@@ -19,6 +19,7 @@
             "name": "Attach to process",
             "type": "debugpy",
             "request": "attach",
+            "justMyCode": false, // allows debugging imported library
             "processId":"${command:pickProcess}"
         }
     ]
