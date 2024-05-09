@@ -1,8 +1,19 @@
 from fastapi import FastAPI, HTTPException, Request, status
 from fastapi.responses import HTMLResponse, RedirectResponse, FileResponse
 from fastapi.staticfiles import StaticFiles
-from call_generation_services import service_requester
-from pydantic import BaseModel
+
+import sentencepiece as _sentencepiece
+import torch as _torch
+import tensorflow as _tensorflow
+
+# imports that have to be loaded before lightning to avoid segfaults
+_sentencepiece
+_tensorflow
+_torch
+
+
+from call_generation_services import service_requester  # noqa: E402
+from pydantic import BaseModel  # noqa: E402
 
 
 app = FastAPI()
@@ -17,6 +28,7 @@ async def health():
 
 @app.post("/service")
 def service(property_request: dict):
+    print("\n-------------STARING NEW REQUEST-------------\n")
     result = requester.route_service(property_request)
 
     return result
@@ -29,6 +41,7 @@ def main():
     print(f"\n[i] cuda is available: {torch.cuda.is_available()}\n")
     if torch.cuda.is_available():
         print(f"[i] cuda version: {torch.version.cuda}\n")
+        print(f"[i] torch version: {torch.__version__}")
     uvicorn.run(app, host="0.0.0.0", port=8080)
 
 

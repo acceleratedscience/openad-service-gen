@@ -4,15 +4,17 @@ import json
 from pathlib import Path
 import glob
 import definitions.services as new_prop_services
-import os, copy, sys
+import os
+import copy
+import sys
 import pandas as pd
 from generation_applications import ApplicationsRegistry as GeneratorRegistry
 from generation_applications import AVAILABLE_ALGORITHMS
 
-print(AVAILABLE_ALGORITHMS)
-
 # from ray import serve
 from pydantic import BaseModel
+
+print(AVAILABLE_ALGORITHMS)
 
 
 class Info(BaseModel):
@@ -57,10 +59,12 @@ def is_valid_service(service: dict):
 def get_services() -> list:
     """pulls the list of available services for"""
     service_list = []
-    service_files = glob.glob(os.path.abspath(os.path.dirname(new_prop_services.__file__) + "/*.json"))
+    service_files = glob.glob(
+        os.path.abspath(os.path.dirname(new_prop_services.__file__) + "/*.json")
+    )
 
     for file in service_files:
-        print(file)
+        # print(file)
         with open(file, "r") as file_handle:
             try:
                 jdoc = json.load(file_handle)
@@ -79,7 +83,6 @@ ALL_AVAILABLE_SERVICES = get_services()
 
 
 class service_requester:
-
     property_requestor = None
     valid_services = ["property", "prediction", "generation", "training"]
 
@@ -124,10 +127,13 @@ class service_requester:
             SAMPLE_SIZE = 10
 
         if category == "generation":
-            if self.property_requestor == None:
+            if self.property_requestor == None:  # noqa: E711
                 self.property_requestor = request_generation()
             result = self.property_requestor.request(
-                request["service_type"], request["parameters"], request["api_key"], SAMPLE_SIZE
+                request["service_type"],
+                request["parameters"],
+                request["api_key"],
+                SAMPLE_SIZE,
             )
 
         return result
@@ -140,10 +146,10 @@ class service_requester:
 def get_generator_type(generator_application: str, parameters):
     service_list = get_services()
     for service in service_list:
-
         if (
             generator_application == service["service_type"]
-            and service["generator_type"]["algorithm_application"] == parameters["property_type"][0]
+            and service["generator_type"]["algorithm_application"]
+            == parameters["property_type"][0]
         ):
             print("Generator")
             print(service)
@@ -153,22 +159,34 @@ def get_generator_type(generator_application: str, parameters):
 
 
 class request_generation:
-
     Generator_cache = []
 
     def __init__(self) -> None:
         pass
 
-    def request(self, generator_application, parameters: dict, apikey: str, sample_size=10):
+    def request(
+        self, generator_application, parameters: dict, apikey: str, sample_size=10
+    ):
         results = []
-        print("generator_application :" + generator_application + " params" + str(parameters))
+        print(
+            "generator_application :"
+            + generator_application
+            + " params"
+            + str(parameters)
+        )
         generator_type = get_generator_type(generator_application, parameters)
         if len(parameters["subjects"]) > 0:
             subject = parameters["subjects"][0]
         else:
             subject = None
         if generator_type is None:
-            results.append({"subject": subject, "generator": generator_application, "result": "check Parameters"})
+            results.append(
+                {
+                    "subject": subject,
+                    "generator": generator_application,
+                    "result": "check Parameters",
+                }
+            )
         try:
             parms = self.set_parms(generator_type=generator_type, parameters=parameters)
         except Exception as e:
@@ -226,7 +244,6 @@ class request_generation:
 
         if "required" in service.keys():
             for param in service["required"]:
-
                 if param in ["subjects", "subject_type"]:
                     continue
                 elif param in parameters.keys():
@@ -268,11 +285,13 @@ if __name__ == "__main__":
         ts = datetime.timestamp(dt)
         if request["service_type"] != "get_crystal_property":
             print(
-                "\n\n Properties for subject:  " + ", ".join(request["parameters"]["subjects"]) + "   ",
+                "\n\n Properties for subject:  "
+                + ", ".join(request["parameters"]["subjects"])
+                + "   ",
                 datetime.fromtimestamp(ts),
             )
             result = requestor.route_service(request)
-            if result == None:
+            if result == None:  # noqa: E711
                 print("Not Supported")
             else:
                 print(pd.DataFrame(result))
