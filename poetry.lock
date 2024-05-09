@@ -2051,7 +2051,7 @@ tqdm = "*"
 type = "git"
 url = "https://github.com/PhillipDowney/guacamol_baselines.git"
 reference = "0.0.4"
-resolved_reference = "c0f2e7e7235db5ec170991b3c16bf8af9665a533"
+resolved_reference = "a788ed67b773817735af0367079b09ded3e23015"
 
 [[package]]
 name = "h11"
