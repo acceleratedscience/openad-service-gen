@@ -10,6 +10,8 @@ import sys
 import pandas as pd
 from generation_applications import ApplicationsRegistry as GeneratorRegistry
 from generation_applications import AVAILABLE_ALGORITHMS
+from gt4sd_common.exceptions import InvalidItem
+import traceback
 
 # from ray import serve
 from pydantic import BaseModel
@@ -59,9 +61,7 @@ def is_valid_service(service: dict):
 def get_services() -> list:
     """pulls the list of available services for"""
     service_list = []
-    service_files = glob.glob(
-        os.path.abspath(os.path.dirname(new_prop_services.__file__) + "/*.json")
-    )
+    service_files = glob.glob(os.path.abspath(os.path.dirname(new_prop_services.__file__) + "/*.json"))
 
     for file in service_files:
         # print(file)
@@ -148,8 +148,7 @@ def get_generator_type(generator_application: str, parameters):
     for service in service_list:
         if (
             generator_application == service["service_type"]
-            and service["generator_type"]["algorithm_application"]
-            == parameters["property_type"][0]
+            and service["generator_type"]["algorithm_application"] == parameters["property_type"][0]
         ):
             print("Generator")
             print(service)
@@ -164,16 +163,9 @@ class request_generation:
     def __init__(self) -> None:
         pass
 
-    def request(
-        self, generator_application, parameters: dict, apikey: str, sample_size=10
-    ):
+    def request(self, generator_application, parameters: dict, apikey: str, sample_size=10):
         results = []
-        print(
-            "generator_application :"
-            + generator_application
-            + " params"
-            + str(parameters)
-        )
+        print("generator_application :" + generator_application + " params" + str(parameters))
         generator_type = get_generator_type(generator_application, parameters)
         if len(parameters["subjects"]) > 0:
             subject = parameters["subjects"][0]
@@ -198,30 +190,41 @@ class request_generation:
         parms.update(generator_type)
         print(parms)
 
-        # try:
-        if "target" in parms:
-            target = copy.deepcopy(parms["target"])
-            parms.pop("target")
-            if isinstance(target, list):
-                if len(target) == 1:
-                    target = target[0]
-            print("-----------------------------------------")
-            print(parms)
-            print("-----------------------------------------")
-            print(target)
-            print(sample_size)
-            print("-----------------------------------------")
+        try:
+            if "target" in parms:
+                target = copy.deepcopy(parms["target"])
+                parms.pop("target")
+                if isinstance(target, list):
+                    if len(target) == 1:
+                        target = target[0]
+                print("-----------------------------------------")
+                print(parms)
+                print("-----------------------------------------")
+                print(target)
+                print(sample_size)
+                print("-----------------------------------------")
 
-            model = GeneratorRegistry.get_application_instance(**parms, target=target)
-        else:
-            model = GeneratorRegistry.get_application_instance(**parms)
-
-        # except Exception as e:
-        #    exc_type, exc_obj, exc_tb = sys.exc_info()
-        #    fname = "\n".join(os.path.split(exc_tb.tb_frame.f_code.co_filename))
-        #    result = {"exception": str(exc_type) + "\n" + str(fname) + "\n" + str(exc_tb.tb_lineno)}
-        #    result = {"error": result}
-        #    return result
+                model = GeneratorRegistry.get_application_instance(**parms, target=target)
+            else:
+                model = GeneratorRegistry.get_application_instance(**parms)
+        except TypeError as e:
+            print(traceback.print_tb(e.__traceback__))
+            return {"error": {"Type Error: ": str(e)}}
+        except IndexError as e:
+            print(traceback.print_tb(e.__traceback__))
+            return {"error": {"Module Index Error: ": str(e)}}
+        except InvalidItem as e:
+            print(traceback.print_tb(e.__traceback__))
+            return {"error": {"Invaliditem: ": str(e)}}
+        except ValueError as e:
+            print(traceback.print_tb(e.__traceback__))
+            return {"error": {"Incorrect value: ": str(e)}}
+        except OSError as e:
+            print(traceback.print_tb(e.__traceback__))
+            return {"error": {"OS ERROR: ": str(e)}}
+        except Exception as e:
+            print(traceback.print_tb(e.__traceback__))
+            return {"error": {"Unknown Error": str(e)}}
 
         try:
             result = list(model.sample(sample_size))
@@ -229,11 +232,24 @@ class request_generation:
             if len(result.columns) == 1:
                 result.columns = ["result"]
             return result
+        except TypeError as e:
+            print(traceback.print_tb(e.__traceback__))
+            return {"error": {"Type Error: ": str(e)}}
+        except IndexError as e:
+            print(traceback.print_tb(e.__traceback__))
+            return {"error": {"Module Index Error: ": str(e)}}
+        except InvalidItem as e:
+            print(traceback.print_tb(e.__traceback__))
+            return {"error": {"Invaliditem: ": str(e)}}
+        except ValueError as e:
+            print(traceback.print_tb(e.__traceback__))
+            return {"error": {"Incorrect value: ": str(e)}}
         except OSError as e:
-            result = e
-            result = {"error": result}
-
-        return result
+            print(traceback.print_tb(e.__traceback__))
+            return {"error": {"OS ERROR: ": str(e)}}
+        except Exception as e:
+            print(traceback.print_tb(e.__traceback__))
+            return {"error": {"Unknown Error": str(e)}}
 
     def set_parms(self, generator_type, parameters):
         request_params = {}
@@ -285,9 +301,7 @@ if __name__ == "__main__":
         ts = datetime.timestamp(dt)
         if request["service_type"] != "get_crystal_property":
             print(
-                "\n\n Properties for subject:  "
-                + ", ".join(request["parameters"]["subjects"])
-                + "   ",
+                "\n\n Properties for subject:  " + ", ".join(request["parameters"]["subjects"]) + "   ",
                 datetime.fromtimestamp(ts),
             )
             result = requestor.route_service(request)
