@@ -1,6 +1,6 @@
 {
     "service_type": "generate_data",
-    "description": "Configuration to generate optimized molecules using recurrent neural networks with hill climbing algorithm.",
+    "description": "Configuration to generate optimized molecules using recurrent neural networks with hill climbing algorithm. \n Note: This should be run on GPU as Timeouts will likely occur when running on CPU.",
     "target": {
         "title": "Scoring functions with parameters",
         "description": "Scoring functions will be used to generate a score for SMILES.",
