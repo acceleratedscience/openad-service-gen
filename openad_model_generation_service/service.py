@@ -1,5 +1,5 @@
 from fastapi import FastAPI, HTTPException, Request, status
-from fastapi.responses import HTMLResponse, RedirectResponse, FileResponse
+from fastapi.responses import HTMLResponse, RedirectResponse, FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 
 import sentencepiece as _sentencepiece
@@ -12,7 +12,7 @@ _tensorflow
 _torch
 
 
-from call_generation_services import service_requester  # noqa: E402
+from call_generation_services import service_requester, get_services  # noqa: E402
 from pydantic import BaseModel  # noqa: E402
 
 
@@ -43,6 +43,13 @@ def main():
         print(f"[i] cuda version: {torch.version.cuda}\n")
         print(f"[i] torch version: {torch.__version__}")
     uvicorn.run(app, host="0.0.0.0", port=8080)
+
+@app.get("/service")
+async def get_service_defs():
+    """return list of services definitions"""
+    # get service list
+    service_list: list = get_services()
+    return JSONResponse(service_list)
 
 
 if __name__ == "__main__":
