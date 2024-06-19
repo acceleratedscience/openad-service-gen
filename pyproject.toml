@@ -17,7 +17,8 @@ gt4sd-trainer-hf-pl = "1.0.0"
 scikit-optimize = "0.10.1"
 # if running default gt4sd_guacamol Services
 gt4sd-inference-all = { git = "https://github.com/acceleratedscience/Open-AD-Model-Service", subdirectory = "openad-model-inference/gt4sd_inference_all", branch = "main" }
-
+# reinvent-models = {git = "https://github.com/acceleratedscience/reinvent-models.git" , branch = "main" ,optional = false}
+# openad_model_inference = { git = "https://github.com/acceleratedscience/Open-AD-Model-Service", branch= "reinvent_cpu", extras=["all"]}
 cuda-python = "11.8.3"
 
 reinvent-chemistry = "0.0.51"
