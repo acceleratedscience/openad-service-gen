@@ -3,13 +3,13 @@
 import json
 from pathlib import Path
 import glob
-import definitions.services as new_prop_services
+import openad_model_generation_service.definitions.services as new_prop_services
 import os
 import copy
 import sys
 import pandas as pd
-from generation_applications import ApplicationsRegistry as GeneratorRegistry
-from generation_applications import AVAILABLE_ALGORITHMS
+from openad_model_generation_service.generation_applications import ApplicationsRegistry as GeneratorRegistry
+from openad_model_generation_service.generation_applications import AVAILABLE_ALGORITHMS
 from gt4sd_common.exceptions import InvalidItem
 import traceback
 

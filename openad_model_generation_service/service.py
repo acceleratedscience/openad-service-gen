@@ -12,7 +12,7 @@ _tensorflow
 _torch
 
 
-from call_generation_services import service_requester, get_services  # noqa: E402
+from openad_model_generation_service.call_generation_services import service_requester, get_services  # noqa: E402
 from pydantic import BaseModel  # noqa: E402
 
 
@@ -38,10 +38,11 @@ def main():
     import uvicorn
     import torch
 
-    print(f"\n[i] cuda is available: {torch.cuda.is_available()}\n")
     if torch.cuda.is_available():
+        print(f"\n[i] cuda is available: {torch.cuda.is_available()}")
         print(f"[i] cuda version: {torch.version.cuda}\n")
-        print(f"[i] torch version: {torch.__version__}")
+        print(f"[i] device name: {torch.cuda.get_device_name(0)}")
+        print(f"[i] torch version: {torch.__version__}\n")
     uvicorn.run(app, host="0.0.0.0", port=8080)
 
 @app.get("/service")
