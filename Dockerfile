@@ -12,6 +12,7 @@ ENV TZ=America/Los_Angeles
 RUN yum update -y && \
     yum install -y \
     gcc \
+    gcc-c++ \
     openssl-devel \
     bzip2-devel \
     libffi-devel \
@@ -21,6 +22,7 @@ RUN yum update -y && \
     libXext libSM libXrender sqlite-devel-3.26.0-19.el8_9.x86_64 xz-devel  && \
     yum clean all && \
     rm -rf /var/cache/yum 
+    RUN dnf -y install gcc-c++
    
 
 # Download and install Python 3.10.14
@@ -50,9 +52,13 @@ COPY Readme.md /src
 ENV PATH="/src/.venv/bin:$PATH"
 
 # install root package
+#RUN pip3.10 install --upgrade pip && pip3.10 install poetry==1.8.2  && pip3.10 install backports.lzma &&\
+#poetry --directory=/src/ install --only main  --no-cache \
+#&& rm -rf ~/.cache && pip cache purge
+
 RUN pip3.10 install --upgrade pip && pip3.10 install poetry==1.8.2  && pip3.10 install backports.lzma &&\
 poetry --directory=/src/ install --only main  --no-cache \
-&& rm -rf ~/.cache && pip cache purge
+&& rm -rf ~/.cache && rm -rf ~/Library/Caches/pypoetry/artifacts && pip cache purge && rm -rf /tmp/poetry_cache
 
 # set permissions for OpenShift
 # from https://docs.openshift.com/container-platform/4.5/openshift_images/create-images.html#images-create-guide-general_create-images

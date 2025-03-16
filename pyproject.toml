@@ -2,7 +2,7 @@
 name = "openad_model_generation_service"
 version = "0.1.0"
 license="MIT"
-description = "Openad_model_Service  properties core service"
+description = "Openad_model_Service  generation core service"
 authors = ["Daniel Choi <choi@ibm.com>", "Phil Downey <Phil.Downey1@ibm.com>", "Brian Duenas <Brian.Duenas@ibm.com>"]
 readme = "Readme.md"
 
