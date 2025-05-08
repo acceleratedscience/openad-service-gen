@@ -39,7 +39,7 @@ RUN cd /usr/src && \
 WORKDIR /src
 COPY pyproject.toml poetry.lock /src/
 COPY openad_model_generation_service /src/openad_model_generation_service
-COPY Readme.md /src
+COPY README.md /src
 ENV PATH="/src/.venv/bin:$PATH"
 
 RUN pip3.10 install --upgrade pip && pip3.10 install poetry==1.8.2  && pip3.10 install backports.lzma &&\
