@@ -1,4 +1,4 @@
-# Generation Inference for SMILES
+# Generative Models
 
 <!--
 The description & support tags are consumed by the generate_docs() script
@@ -10,6 +10,7 @@ https://openad.accelerate.science/docs/model-service/available-services
 <!-- support:gcloud:true -->
 
 <!-- description -->
+
 <!-- /description -->
 
 For instructions on how to deploy and use this service in OpenAD, please refer to the [OpenAD docs](https://openad.accelerate.science/docs/model-service/deploying-models).
