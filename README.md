@@ -1,4 +1,4 @@
-# Generative Models
+# Generative Algorithms
 
 <!--
 The description & support tags are consumed by the generate_docs() script
@@ -10,7 +10,7 @@ https://openad.accelerate.science/docs/model-service/available-services
 <!-- support:gcloud:true -->
 
 <!-- description -->
-
+This OpenAD service provides access to generative algorithms for SMILES and SELFIES such as [PaccMann](https://paccmann.github.io/) and [Regression Transformer](https://github.com/IBM/regression-transformer). Generative algorithms in this collection were first offered in the open source library, [GT4SD](https://github.com/GT4SD/gt4sd-core).  
 <!-- /description -->
 
 For instructions on how to deploy and use this service in OpenAD, please refer to the [OpenAD docs](https://openad.accelerate.science/docs/model-service/deploying-models).
