@@ -10,7 +10,14 @@ https://openad.accelerate.science/docs/model-service/available-services
 <!-- support:gcloud:true -->
 
 <!-- description -->
-This OpenAD service provides access to generative algorithms that output SMILES or SELFIES. These models include [PaccMann](https://paccmann.github.io/) and [Regression Transformer](https://github.com/IBM/regression-transformer). These generative algorithms were previously offered in [the open source library, GT4SD](https://github.com/GT4SD/gt4sd-core).  
+This OpenAD service provides access to generative algorithms that output SMILES or SELFIES.
+
+- [Regression Transformer, 2023](https://github.com/IBM/regression-transformer). Uses transformers for both regression and generation. Generates SELFIES based on desired properties.
+- [PaccMann, 2020](https://paccmann.github.io/). Uses autoencoders to generate molecules to target cancer based on omics profiles.
+- [TorchDrug, 2021](https://torchdrug.ai/). Offers two kinds of graph-based networks to generate SMILES: [GCPN](https://proceedings.neurips.cc/paper_files/paper/2018/file/d60678e8f2ba9c540798ebbde31177e8-Paper.pdf) and [GraphAF](https://arxiv.org/pdf/2001.09382).
+- [MOSES, 2020](https://github.com/molecularsets/moses). [GuacaMol, 2019](https://github.com/BenevolentAI/guacamol). And more.
+
+These generative algorithms were previously offered in [the open source library, GT4SD](https://github.com/GT4SD/gt4sd-core).  
 <!-- /description -->
 
 For instructions on how to deploy and use this service in OpenAD, please refer to the [OpenAD docs](https://openad.accelerate.science/docs/model-service/deploying-models).
