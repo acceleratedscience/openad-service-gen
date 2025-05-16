@@ -1,4 +1,4 @@
-# Generative Algorithms
+# Generative Algorithms for small molecules with SMILES or SELFIES output
 
 <!--
 The description & support tags are consumed by the generate_docs() script
